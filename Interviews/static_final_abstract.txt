@@ -1,0 +1,27 @@
+http://www.tutorialspoint.com/java/java_nonaccess_modifiers.htm
+
+Static Variables, Methods
+Final Variabales, Methods, Class
+Abstract Methods, Class
+synchronized Methods - The synchronized key word used to indicate that a method can be accessed by only one thread at a time.
+transient Variabales - An instance variable is marked transient to indicate the JVM to skip the particular variable when serializing the object containing it.
+volatile Variabales - The volatile is used to let the JVM know that a thread accessing the variable must always merge its own private copy of the variable with the master copy in the memory.
+
+Public Class,
+Public abstract Class - Class should be extended
+Public Final Class - Class can't be extended
+
+The synchronized Modifier:
+The synchronized key word used to indicate that a method can be accessed by only one thread at a time. The synchronized modifier can be applied with any of the four access level modifiers.
+
+The transient Modifier:
+An instance variable is marked transient to indicate the JVM to skip the particular variable when serializing the object containing it.
+
+This modifier is included in the statement that creates the variable, preceding the class or data type of the variable.
+
+The abstract Modifier:
+abstract Class:
+An abstract class can never be instantiated. If a class is declared as abstract then the sole purpose is for the class to be extended.
+
+abstract Methods:
+An abstract method is a method declared with out any implementation. The methods body(implementation) is provided by the subclass. Abstract methods can never be final or strict.

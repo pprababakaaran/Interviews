@@ -1,0 +1,11 @@
+Websphere Commerce Components
+Core Commerce
+	Catalog
+	Marketing
+Extended Business Management
+	Member Management
+	Order Management
+	Inventory Management
+	Trading Management
+	Collaboration
+	

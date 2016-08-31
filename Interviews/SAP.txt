@@ -1,0 +1,38 @@
+Java Concurrency - Java tutoruials
+Collections
+Memory problem
+
+Thread
+Memory
+Inconsistance
+Atomic
+Voilatile
+queue - highly concurrent wihtout synchronized
+
+Tree
+
+N-ry tree
+Binary Tree
+trinary Tree
+
+
+Single operator NAND gate build !(a&&b)
+
+TreeSet
+TreeMap
+
+Red Black tree(Unbalanced) vs Binary Tree (Balanced)
+
+
+Encapsulation vs abstraction
+
+Design Patterns
+Event register (Observer pattern)
+
+Spring AOP, MVC and Rest
+
+Developer in SAP Labs, Bangalore with 5+ years experience working primarily as a Java/J2EE resource. Currently, part of core team developing platform on REST based services using Apache Jersey, JPA deployed on Cloud Foundry with multiple database support. Currently its SAP HANA, MySQL, Redis for Cache and H2 for testing.
+
+Part of Core Development team working on IOT Jersey (Reference Implementation for JAX-RS 2.0) based Platform As A Service (PaaS), for providing data based services platform to Siemens.
+
+Also good hands-on with Javascript based programming paradigms- SAP UI5, Fiori, Angular JS, HANA XS.

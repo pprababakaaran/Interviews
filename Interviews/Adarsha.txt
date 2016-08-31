@@ -1,0 +1,156 @@
+Thermofisher Scenitific
+
+1. Written - Related to Applet, RMI, Thread - 20 Questions
+2. F2F
+	How do you build people might know you (Recommendation)? - Graph Database
+	Javascript - Inheritance, Polymorphism, Iterator utility
+	Most of questions are javascript
+	
+	
+Oracle:
+
+Telephonic:
+
+How String literal works?
+When do you use abstract class and interface?
+Collections
+How arraylist changes the size dynamically?
+How map works internally?
+
+Buzzles: 3 boxes, apple, orange and apple and orange in one box. Labels are misplaced.
+
+
+Altisource:
+
+How Class loader works?
+Thread questions. Difference between start, run.
+How map works internally?
+How hashmap works internally?
+Which data strcuture used in Map?
+
+
+JP Morgan:
+
+Collection framework
+Generics
+Difference between Map, HashMap?
+Difference between arraylist and list?
+Thread
+JVM
+
+Altimetrix:
+Telephonic: Java basic questions
+F2F: Problem sloving. Anogram detection, 2D metrix sprial order, Spring controller questions, AOP, Proxy, Hibernate - get, load, cache
+How AOP works internally?
+How @transaction working internally?
+Why @Aync method can't called on same class?
+Proxy concepts
+How do you find linkedlist is circular or not?
+
+Morgan Stanley:
+Distributed caching
+Problem statement
+Comparator & comparable use cases
+Iterator
+Exception Hirerachy  - Checked and unchecked exception
+Hashmap and Concurrent Hashmap
+Generics in and out
+How do you find number is even or odd using Bitwise operator?
+How do take modules using Bitwise operator?
+Usecases on generics with inheritance
+SOAP Vs REST
+ClassNotFound vs ClassDefNotFound
+Singleton - Double locking check
+How do you find duplicate element a list?
+What is functional programming?
+Lambda expression
+Where do you use stream?
+
+Interview Questions
+
+    1.Write a program to create a deadlock between 2 threads.
+    2.Implement a Thread pool
+    3.Given a v huge list of integers, multiply every element in the list by 2.(mylti threading) list.stream().parallel().foreach(this:doSomething);
+	 or List<Integer> resultNumbers = IntStream.range(0,100)
+            .parallel()
+            .map(i->i*MUTIPLY_ELEMENT)
+            .boxed()
+            .collect(Collectors.toList());
+    4. Java is pass by ref or pass by variable
+    5. Diff between final and immutable
+    6. Diff between declaring string and stringbuffer as final variables.
+    7.Given a table with the following fields
+      account-id Trading_Date Stock_name
+     How do you manage session details of the recent 10 most   active users? Which are the collections you use for this?
+	 you can use a Queue = linked list implementation to fetch most recent users
+	  Given a set of transactions done by a person, it can   reach a server in different order. Had to come up with a solution to maintain all transactions done by a person in the order it was done though transactions may arrive out of order.
+	  Simple soultion using min-heap and sequence numbers
+	 
+Juniper:
+Telephonic: 
+Mutable
+Immutable
+Hashmap and Concurrent Hashmap
+What will happen in map if key is not immutable?
+What is advantage of static in distributed environment?
+Singleton in distributed?
+How do you design own load balancer?
+JNDI
+Serilaization
+Use case for AOP
+Spring Security
+Custom Annotations
+Web Server - Mod Proxy
+If one server went down, how do you make sure sessions form that server replicated in another server?
+Project Architecture
+Hibernate - get, load, cache
+ThreadLocale
+How do you balance a tree?
+Maven - How do you connect to custom reposistory like oralce?
+
+
+Buzzles: Based on search. Related to binary search.
+
+
+GE:
+Telephonic:
+Hashmap and Concurrent Hashmap
+When ConcurrentModificationException occurs? It occurs list, arraylist and set, modifying the same object when iterating. We can avoid this using CopyOnArrayList.
+copyonarraylist
+Controller Vs RestController
+BlocingQueuee
+How do you implement queue using two stack?
+Find the repeated sequence in a array of interger without using any collections
+Connection pool design - get, close, put
+Custom caching implementation ex. query based on field, if result is not available in cache, query from database.
+RedBus - Distributed environment - how do you block the seat once user is selected? and how do you reflect that to other users?
+Producer, Consumer problem - Threading
+How do you troublesuit runtimeexception? - Analyzing heapdump
+
+Problem statement: Coffee vending machine
+
+https://www.careercup.com/
+http://javarevisited.blogspot.com/
+http://java67.blogspot.com/
+http://www.journaldev.com/
+https://docs.oracle.com/javase/tutorial/essential/concurrency/
+
+
+Synchronization. Difference ways to achieve synchronization? 1. Synchronized block 2. ThreadLocale 3. Volatile
+Immutable classes in java
+
+Singleton in and out with use cases
+Factory
+Abstract Factory
+Decorator
+Builder
+Flyweight
+Observer
+prototyping - Cloning
+Facade
+Proxy
+
+
+
+
+

@@ -1,0 +1,51 @@
+OOPS
+Modifiers
+String & Stringbuffer
+Interface & abstract class
+Static
+Final
+Thread
+Concurrency
+Deadlock
+Garbage collection
+Generics
+Collections
+
+Data Structure
+
+Design Pattern
+Singleton
+Facade
+Factory
+Observer
+Front Controller
+
+Servlet Life Cycle
+JSP Error Handling
+Directives
+Default JSP Object
+Custom Tag Libraries
+
+Commerce Framework Architecture
+Sub Systems
+Member Sub System Tables
+Controller Command
+Task Command
+Cachable Command
+View Registry
+EJB concepts
+Data Bean
+Entity Bean
+Access Bean
+
+SOAP
+Rest
+
+Solr
+Lucence
+
+JDBC
+
+Waterfall Model
+Incremental Model
+Agile Methodology

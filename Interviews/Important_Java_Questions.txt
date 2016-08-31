@@ -1,0 +1,145 @@
+JIT Compiler - If loop or methods takes more than thersold level, jvm uses JIT compiler to convert bytecode into machine code.
+JDK - Convert java code into bytecode
+JVM & JRE - JVM is runtimetime platform. JRE is implementation of JVM.
+
+Class Loader - Delegation, Visibility, Uniqueness.. Bootstrap(rt.jar), Extension(ext) and application(classpath).
+visibility principle - Child ClassLoader can see class loaded by Parent ClassLoader but vice-versa is not true.
+Which mean if class Abc is loaded by Application class loader than trying to load class ABC explicitly using extension ClassLoader will throw either java.lang.ClassNotFoundException.
+Load Class Explicitly - Class.forName(classname)
+forName() -> loadClass()->findClass() if not found ClassNotFoundException  else defineClass(). URLClassLoader, CustomClassLoader
+
+String and Immutable class
+String one = "abc"; - Check string pool, if avialble JVM assign reference to existing object, if not create and assign.
+String two = new String("abc"); - two objects. One object in string pool and second in heap memory refered by var two and having same char sequence.
+two.intern() - one and two will point to same string pool literal.
+
+Immutable class - Final Class, Final member variable, no setter method.
+
+Transient - To mark member variable not to be serialized.some secured information like password, SSN number etc. Image Thumbnail can be use transient. IF member variable can be reformed during runtime rather than getting from stream.
+
+Volatile - Used in Multithreading. Indicator to java compiler and Thread do not cache value of this variable and always read from main memory. If you want to share variable in which read and write operation is atomic by implementation. Indicate that this variable may be used by another thread.
+
+Atomic - AtomicInteger can be used, where synchornized increment operations are required. compare and swap. if current value is not equal to incoming value then value will be replaced.
+
+singleton class
+singleton with volatile
+SingleTon double locking check
+
+Abstraction - When you have partial implementation methods(concerete methods) Ex. Common method or implementation for subclass. Partial or 100% abstraction. If code is frequently changing go with abstract class.
+Interface - When you dont know implementation. 100% abstraction. JVM looks for vtable during resolution time. So interface is time taking.
+Marker Interface - Empty Interface. Used to inform something to the compiler. Ex. Serializable or Cloneable.
+
+List(Interface)->AbstractList(Abstract Class, implements List and implements common methods)->ArrayList or LinkedList(Extends AbstractList)
+
+Serialization - Object -> Stream of Bytes(Binary Format) -> FILE,DB,MEMORY or Another JVM
+and serialVersionUID - ID stamped with object when it gets serialized using hashcode. Used as version of control. 
+When you add pr modify any field in class then already serialized class will not able  to recover  becuase  serialVersionUID generated for new class is different. http://javarevisited.blogspot.com/2011/04/top-10-java-serialization-interview.html
+if we don't provide serialVersionUID in our code java compiler will generate it and normally it’s equal to hashCode of object.
+
+ObjectOutputStream.writeObject(), ObjectInputStream.readObject() readExternal() and writeExternal()
+
+Cloneable - If you don't implement Cloneable then invoking super.clone() will throw a CloneNotSupportedException.
+
+Abstraction - You do abstraction when deciding what to implement. Identifying commonalities and reducing features that you have to work with at different levels of your code
+
+Encapsulation - You do encapsulation when hiding something that you have implemented.
+
+Polymorphism - which advice use of common interface instead of concrete implementation while writing code. Desing should be capable of handling new requirement. Go for interface rather than concerete implementation.
+Static Binding - Type/Method resolution happens at compile time. Ex. Method overloading.
+Dynamic Binding - Type/Method resolution happens at runtime based in object created. Ex. Method  Overriding.
+
+Array - Contigneous memory. int a[] = new int[10]; memory 10*32 bit (10*4 byte). a will point to starting point.
+Vector - Thread safe. All the methods which structurely modifies are synchornized. Ex, add(), remove(). Doubling the array size
+ArrayList - Internally uses dynamic array. get(index) O(1), insert, remove O(n). ensureCapacity(size+1), shallow copy. Increases 50% of current arraysize.
+LinkedList - Internally uses doubly linked list. get(index) O(n), insert, remove O(1)
+
+HashMap - Hashing Prinicple. Internally it uses linkedlist but in in java 8 it uses Tree. Key HashCode, Hash Value, Bucket(Entry[]. Default is 16. When size reached 3/4(load factor: 0.75), Entry[] will be increased by double(rehashing). Resizing in multithreading concepts will cause for race condition).
+Put->AddEntry(Find index to place entry<k,v> based on key index)->Entry<K,V>.
+1. Calculate hashcode for the key
+2. Calculate position hash % (arrayLength-1)) where element should be placed(bucket number)
+3. If you try to add a value with a key which has already been saved in HashMap, then value gets overwritten.
+4. Otherwise element is added to the bucket. If bucket has already at least one element - a new one is gets added and placed in the first position in the bucket. Its next field refers to the old element.
+
+HashMap get:
+1. Calculate bucket index using key hashcode
+2. Gets all the Entry<K,V> from bucket index, loop through if hashcode and key value matches it returns the value.
+
+If we are inserting custom class as key, hashcode and equals (contract) should be overridden to avoid chances  of collision.
+
+HashCode&Equals Contract :	1) If two objects are equal, then they must have the same hash code.
+							2) If two objects have the same hash code, they may or may not be equal.
+							
+HashMap				|TreeMap				|LinkedHashMap
+No guarantee Order	|Sorted Natural Order	|Insertion Order
+O(1)				|Olog(n)				|O(1)
+Map					|NavigableMap,SortedMap	|Map
+Null K,V Allowed	|Only Null V allowed	|Null K,V Allowed 
+Bukets				|Red-Black Tree			|Double-Linked Buckets
+
+HashSet:
+Internally uses HashMap. Allows only unique elements. Set Values are stored in Map key and valus are est to null. Only one null key allowed.
+
+HashSet				|TreeSet				|LinkedHashSet
+No Order			|Sorted Natural Order	|Insertion Order
+HashMap				|TreeMap				|LinkedHashMap
+Set					|SortedSet				|Set
+O(1)				|Olog(n)				|O(1)
+
+Priority Queue - Provide priority to your job where list of job is scheduled.
+BlockingQueue - Thread-safe. throws NullPointerException when you try to add null on queue. Should use BlockingQueue where producer-consumer problem occurs. Where producer writes slowly but consumer read very past.
+ArrayBlockingQueue - Fixed size. If size is fulled, producer has to wait until consumer consumes it from queue.
+LinkedBlockingQueue - Lock before any modification.f you request an element from a LinkedBlockingQueue and the queue is empty, your thread will wait until there is something there.
+ConcurrentLinkedQueue - No lock.  When there is no concurrency between producer-consumer but only between producer-producer and consumer-consumer. when producers first produce something and finish their job by placing the work in the queue and only after the consumers starts to consume, knowing that they will be done when queue is empty.
+
+put() will block if BlockingQueue is full and take() will block if BlockingQueue is empty
+peek() - returns head of the queue
+poll() - retrieves and removes elements from head
+
+boolean add(E e) - throws IllegalStateException if no space.
+boolean offer(E e) - return true upon success, if no space return false.
+void put(E e) - Inserts specified element into queue, waits if neccesary space is not available.
+
+boolean remove(Object o) - Removed if it is present. 
+E poll() - retrieves and removes head of the element.
+E take() - retrieves and removed the head of this queue, waiting if neccesary until an element becomes available.
+E element() - retrieves, but does not remove.it doesnot throw excpetion as like peek
+E peek() - retrieves head of the queue, returns null until data is available 
+
+Worker implements Runnable->In run() {Runnable r = queue.dequeue->;r.run()}
+ThreadPoolManager - >Constrcutor(int THREAD_MAX_CAP = capacity;initAllConsumers();)->initAllConsumers(){loop in thread_max_cap{Thread t = new thread(new worker(myQueue,i.toString());t.start())}}->submitTask(Runnable r) (myQueue.enqueue(r);)
+TestThreadPoolManager - > poolManager.submitTask(new Runnable() { override run()} );
+
+Enumeration - Used in Legacy collections like vector. List doesnot support. Remove is not possible. hasMoreElement(), nextElement().
+Iterator - List, Set uses iterator. secure and safe. It doesnot allow other thread to modify collection object. It throws concurrentmodificationexception. hasNext(), next(), remove()
+ListIterator - Allows to traverse both direction by using method previous, next. Also add method is there.
+Fail-Fast Iterator - Fail as soon as structure of collection has changed. It throws ConcurrentModificationException.
+Fail-Safe Iterator - Concurrent thread works on clone of collection object instead of original object. Ex. Iterator on CopyOnWriteArrayList or ConcurrentHashMap
+
+map.keySet() - Gives all keys from map. Set<String>
+map.entrySet() - Gives all keys and values from map. Set<Map.Entry>
+
+
+Generic - Compile time type safety, faciliate template kind of thing(Ex. List). To avoid ClassCastException at runtime. Type Eraser, <T>, <T, S>, <E>
+
+Comparable - Single sorting sequence., compareTo(object o)
+Comporator - Multiple sorting sequence Ex. String. public int compare (Object o1, Object o2)
+
+Creational Design Pattern - Object creation
+SingleTon - Double Checking lock, synchornized, Volatile, singleton with Enum. Ex. Logging, Runtime.getRunTime()
+Factory - Encapsulate object creation logic.Ex. Converter object creation for PDFConverter, DOCConverter. Ex. in jdk valueOf(), getInstance(), newInstance(), Spring, Structs, hibernate session factory Ex. JDBC getConnection() without knowing database type
+Builder - Solves too many constructors to maintain. StringBuilder and StringBuffer append works using Builder patterns.
+Prototype - Clone the object or create different instance of itself with the same properties Ex. Cloneable Interface object.clone()
+
+Structural Design Pattern - how classes and objects can be composed, to form larger structures.
+Decorator - Enhance/add the functionality of particular object at runtime. Wrap the original object with decorator object. Ex. in JDK InputStream, OutputStream, Reader, Writer, Collections.synchornizedMap() etc.
+Facade - Simplied Interface talks to multiple sub systems (Ex. take memberIds from local database and send that data to IA+ system to fetch or update some information)
+Proxy
+Flyweight - Reusing exiting object Ex. Cache
+Adapater - Sibel Adapater, jCO connector, function module
+
+Behavioural Design Pattern
+Strategy - Runtime change the behaviour
+Observer - Push Notification  
+
+
+LRU Cache - LRUCache, use LinkedHashMap, once map size reaches remove old element using removeEldestEntry(Map.Entry<K,V> eldest) and insert new element at end.

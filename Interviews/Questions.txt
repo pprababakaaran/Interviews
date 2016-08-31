@@ -1,0 +1,182 @@
+1. How the Multiple Inheritance can be acheived in Java?
+2. Diff b/w Static & dynamic Polymorphism
+3. Encapsulation
+4. When do u choose Abstract Class and When do u choose Interface? or When i need to use abstract class and interface in Java?
+	When u dont know the implementation for certain functions, u will the leaving the implementaiton of methods to subclass. That time you should use abstract class
+	When u know the implementation for subclass functions, that time you should use interface.
+	
+	If you want to make a new car(WagonX) in which all the another car's properties are included like color,size, engine etc.and you want to add some another features like model,baseEngine in your car.Then simply you create a abstract class WagonX where you use all the predefined functionality as abstract and another functionalities are concrete, which is is defined by you. 
+Another sub class which extend the abstract class WagonX,By default it also access the abstract methods which is instantiated in abstract class.SubClasses also access the concrete methods by creating the subclass's object.
+
+An Abstract Class is written when there are some common features are shared by all the objects.Suppose in your project have some common features than declared that type of properties and methods as Abstract and u can extends where ever u want in your Module. 
+Interface is used when all the features are implemented differently in different objects.
+
+5. What is the default member variable access level in interface?
+	
+http://www.jusfortechies.com/java/core-java/static-blocks.php
+http://www.javatpoint.com/static-keyword-in-java
+6. Why static variables are not allowed inside a ordinary method ?
+	Static variables belong to the class; variables declared inside a method are local variables and belong to that method. So you can call them final, but not static or public or protected or private.
+7. Is static method can access non-static variable?
+8. What is the use of static blocks in java?
+	Static blocks are also called Static initialization blocks . A static initialization block is a normal block of code enclosed in braces, { }, and preceded by the static keyword.
+9. Where the static variables get stored?
+http://javarevisited.blogspot.in/2011/12/final-variable-method-class-java.html
+10. Use of Final keyword in variable/methd/class level?
+11. Benefits of final keyword in Java
+12. Use of Final in immutable class?
+13. Steps for JDBC connectivity
+
+
+
+1. What will happen when you instanstiate the class?
+2. What will happen when you create an object?
+3. What will you do when u get ClassNotFound Exception?
+4. When you will use static block in a class?
+5. When will contructor get called? What kind of action you will do in constrcutor?
+6. What is the difference between a Vector and an Array. Discuss the advantages and disadvantages of both?
+	Vector can contain objects of different types whereas array can contain objects only of a single type. 
+	- Vector can expand at run-time, while array length is fixed. 
+	- Vector methods are synchronized while Array methods are not
+	
+7. What is the use of transient keyword?
+8. When will you use final keyword in class?
+9. How can you force garbage collection?
+10. How can you mark particluar object for garbage collection?
+11. When do you use interface and abstract class?
+12. Difference between POJO class and JavaBean?
+13. Servlet life cycle
+14. How do you handle exceptions in JSP? attribute called error to redirect to error page
+15. 
+
+
+
+1. Difference between JSR 168 and JSR 286 portlet?
+2. Difference between HttpSession and Portlet Session?
+3. What is the life cycle for portlet?
+
+4. What kind of requirement drive you to DB2 rather than orcale?
+
+
+
+1. Have you worked on any webserives in your projects?
+
+2. What is differece b/w SOAP and Rest webservices?
+	REST does not enforces message format as XML or JSON or etc. But SOAP is XML based message protocol.
+	REST follows stateless model. SOAP has specifications for stateful implementation as well.
+	SOAP uses interfaces and named operations to expose business logic. REST uses (generally) URI and methods like (GET, PUT, POST, DELETE) to expose resources.
+	
+Why array is preferred to store password than String in Java?
+
+String is an immutable object.The value saved as a string is always available in the string pool.But in case of array it will not happen.So the recovery of password is less if we save password in array .
+As String Objects are immutable, we cannot change the value and the value is available in the pool (memory) until it is garbage collected.
+Strings are immutable, if you store password as plain text it will be available in memory until Garbage collector clears it. This would be a security threat. Hence store the password inacter array.
+
+If we have a class which has both hashCode() and equals() method implemented and we put objects of these class in a HashSet then what will happen?
+Then one will be able to maintain the uniqueness on the objects in the HashSet , as there will be no duplicate objects based on hashcode and equals method implementation.
+Content of HashSet cannot be replicated
+Duplication of the HashSet content is avoided by using the implementation of the HashCode & equals methods of the object
+
+What is the difference in using request.getRequestDispatcher() and context.getRequestDispatcher()?
+context.getRequestDispatcher() takes only an absolute path as the parameter; whereas request.getRequestDispatcher() does not have this restriction and can accept relative path as well.
+
+
+What is system.out.println() means in Java?
+Prints a line of text onto the screen and goes to the next line.
+"System" - A class in java.lang.package "out" - An static member of System class and its type is PrintStream which is again a class. "println()" - A method of PrintStream class.
+
+A class is a template, blueprint,or contract that defines what an object’s data fields and methods will be.
+A class is a definition of objects of the same kind. In other words, a class is a blueprint, template, or prototype that defines and describes the static attributes and dynamic behaviors common to all objects of the same kind.
+An object is an instance of a class.
+Encapsulation provides the security that keeps data and methods safe from inadvertent changes.
+A class encapsulates the name, static attributes and dynamic behaviors into a "3-compartment box". Once a class is defined, you can seal up the "box" and put the "box" on the shelve for others to use and reuse. Anyone can pick up the "box" and use it in their application.
+Inheritance is parent-child relationship of class which is mainly used for code reusability.Types: Class Inheritance or Interface Inheritance
+Inheritance: A class can get some of its characteristics from a parent class and then add unique features of its own. 
+Polymorphism: The ability to change form is known as polymorphism. Java supports different kinds of polymorphism like oveloading, overriding, parametric etc.
+Using abstraction one can simulate real world objects.
+Abstraction is the concept of exposing only the required essential characteristics and behavior with respect to a context. 
+Abstraction provides advantage of code reuse
+Abstraction enables program open for extension
+Inheritance (IS-A relationship), or object composition (HAS-A relationship)
+Composition is dynamic binding (run time binding) while Inheritance is static binding (compile time binding)
+
+A constructor is a special method that has the same method name as the class name. A constructor is used to construct and initialize all the member variables. 
+ keyword "this" to refer to this instance inside a class definition.
+
+Each of primitive data types has dedicated class in java library.
+Wrapper class provides many methods while using collections like sorting, searching etc.
+
+Association is a relationship between two objects.
+Aggregation is also called a “Has-a” relationship.
+composition: When an object contains the other object, if the contained object cannot exist without the existence of container object, then it is called composition.
+
+Ex:
+
+A Library contains students and books. Relationship between library and student is aggregation. Relationship between library and book is composition. A student can exist without a library and therefore it is aggregation. A book cannot exist without a library and therefore its a composition. For easy understanding I am picking this example. Don’t go deeper into example and justify relationships!
+
+Generalization uses a “is-a” relationship from a specialization to the generalization class.
+Realization is a relationship between the blueprint class and the object containing its respective implementation level details
+Change in structure or behaviour of a class affects the other related class, then there is a dependency between those two classes
+
+Inheritance
+Encapsulation
+Polymorphism (Static/Compile Time Polymorphism Ex. Method Overloading, Dynamic/Run Time Polymorphism Ex. Method Overriding)
+Abstraction
+- See more at: http://www.w3resource.com/java-tutorial/java-object-oriented-programming.php#sthash.GXlbIimC.dpuf
+
+
+Multiple Inheritance: http://javapapers.com/core-java/why-multiple-inheritance-is-not-supported-in-java/
+
+
+===========
+ In class-based object-oriented programming paradigm, "object" refers to a particular instance of a class where the object can be a combination of variables, functions, and data structures.
+ 
+ A class is the blueprint from which individual objects are created.
+ 
+ Object-oriented programming (OOP) is a programming language model organized around objects rather than "actions" and data rather than logic. Historically, a program has been viewed as a logical procedure that takes input data, processes it, and produces output data.
+ 
+Polymorphism:
+
+say a door..
+a door to a temple, a door to a house, a door to a kitty house,
+all are doors, but all look different
+
+polymophism ...good example is when dog smells a cat it will barkand run after it but when it smells food it it will salivate and run to its bowl.ie .sence of smell is at work in both situations but action depends upon what it smells.
+
+Encapsultion:
+
+cars and owners...
+all the functions of cars are encapsulated with the owners..
+No one else can access it...
+
+Inheritence:
+
+Kingfisher jet
+^
+|
+Airplane
+^
+|
+Flying Things
+
+Polymorphisam:
+--------------
+When one task is performed by different ways i.e. known as polymorphism. For example: to convense the customer differently, to draw something e.g. shape or rectangle etc.
+
+In java, we use method overloading and method overriding to achieve polymorphism.
+
+Inheritance: 
+-------------
+When one object acquires all the properties and behaviours of parent object i.e. known as inheritance. It provides code reusability. 
+It is used to achieve runtime polymorphism.
+
+A secintific calculator is a extend form of Caluculator here Caluculator is parent and secintific calculator is Child object. 
+
+Encapsulation: Binding (or wrapping) code and data together into a single unit is known as encapsulation. For example: capsule, it is wrapped with different medicines.
+--------------
+A java class is the example of encapsulation. Java bean is the fully encapsulated class because all the data members are private here.
+
+Abstraction: Hiding internal details and showing functionality is known as abstraction. For example: phone call, we don't know the internal processing.
+-----------
+In java, we use abstract class and interface to achieve abstraction.
+

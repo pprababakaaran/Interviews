@@ -1,0 +1,69 @@
+Concurrent Programming
+1. Thread
+2. Processes
+
+Time Slicing
+
+IPC - Inter Process Communication
+Process - Instance of Program running in a computer or task. Own Separate memory.
+
+Theards - Lightweight process. Threads from same process same memory space.
+
+Start->New->Runnable->Running->Pause/Sleep->Terminate
+
+IllegalStateException
+
+
+
+Extending Thread class
+Implementing Runnable interface
+Callable 
+
+1. Callable can return result
+2. Callable can throw checked Exception.
+
+Read more: http://javarevisited.blogspot.com/2016/08/useful-difference-between-callable-and-Runnable-in-Java.html#ixzz4IKYYrzgD
+
+run - used to perform action for a thread
+start - starts the execution of the thread. Start will add the thread to threadpool. Its upto thread scheduler which thread to pick.
+sleep(long miliseconds) - makes currently executing thread to sleep for specified milliseconds
+wait & notify - it should inside synchronized block. wait until other thread notify to start the execution. Ex. Producer & consumer problem. Blocking queue internally uses this.
+NotifyAll - wakes up all the threads that called wait() on same object.
+Daemon thread - service provider thread that provides services to the user thread. Ex. gc and finalizer
+preemptive scheduling - Highest priority task executes until it enters the waiting or dead states
+time slicing - Task executes for a predefined slice of time and then reenters the pool of ready tasks
+Thread pool - group of worker threads that are waiting for the job and reuse many times.
+
+CountDownLatch is useful if you want to start main processing thread once its dependency is completed.
+
+CountDownLatch  - synchronizer which allows one thread to wait for one or more threads before start proceesing.It also can be achieved using wait and notify.
+
+CountDownLatch works in latch principle,  main thread will wait until Gate is open. 
+
+Disadvantage - its not reusable once count reaches zero. CyclicBarrier solves this problem.
+
+CountDownLatch.await() - thread will wait until count reaches zero or another thread interrupt.
+CountDownLatch.countDown() - as soon as count reaches zero, thread awaiting starts running.
+
+
+Any thread, usually main thread of application,  which calls CountDownLatch.await() will wait until count reaches zero or its interrupted by another Thread. All other thread are required to do count down by calling CountDownLatch.countDown() once they are completed or ready to the job. as soon as count reaches zero, Thread awaiting starts running.
+
+CyclicBarrier - Natural requirement for a concuurent program becuase it can be used to perform final part of the task once individual tasks are completed.
+
+CyclicBarrier.await() - thread will wait until count reaches zero.
+CyclicBarrier.reset() - reset the counter.
+
+If another thread interrupts the thread which is waiting on barrier it will throw BrokernBarrierException.
+
+There are two important concepts in multithreading environment.
+
+    atomicity - AtomicInteger uses CAS (compare-and-swap) low-level CPU operations. They allow you to modify a particular variable only if the present value is equal to something else (and is returned successfully). This can be used in place where synchronized increment requires.	
+    visibility - Volatile eradicates visibility problem.copy the value to register
+
+ReentrantLock - concrete implmentation of Lock. Mutual exclusive lock. implicit lock provided by synchronized. Timeout is possible. List all waiting threads. 
+
+Thread Interference
+Suppose there are two threads Thread-A and Thread-B working on the same counter instance . Say Thread-A invokes increment() , and at the same time Thread-B invokes decrement() . Thread-A reads the value c and increment it by 1 . At the same time Thread-B reads the value ( which is 0 because the incremented value is not yet set by Thread-A) , decrements it and set it to -1 . Now Thread-A sets the value to 1 .
+
+Memory Consistency Errors
+Memory Consistency Errors occurs when different threads have inconsistent views of the shared data. In the above class counter , Lets say there are two threads working on the same counter instance , calls the increment method to increase the counter's value by 1 . Here it is no guarantee that the changes made by one thread is visible to the other .
