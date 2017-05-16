@@ -1,0 +1,105 @@
+Javscript Hoisting:
+	Moving declarations to the top of the current scope.
+
+	Ex.
+	x = 5; // Assign 5 to x
+	elem = document.getElementById("demo");
+	elem.innerHTML = x;
+	var x; // Declare x 
+
+	Hoisting will not applicable for variable with declaration with initilization. Ex. var y ="10"
+	
+	Ex.
+	x = 5; // Assign 5 to x
+	elem = document.getElementById("demo");
+	elem.innerHTML = x;
+	var x; 
+	
+	alert(x+" "+y); // y is undefined
+	var y = 10;
+
+DOM (Document Object Model) is a standard for accessing documents.
+When a web page is loaded, the browser creates a Document Object Model of the page.
+- Core DOM - standard model for all document types
+- XML DOM - standard model for XML documents
+- HTML DOM - standard model for HTML document
+Document->HTML->Body/head
+
+Client side slient update when change at server side
+1. Add and remove listeners to inventory
+2. Notify changes to listeners
+3. Register the managed bean to Inventory
+4. Update data model
+5. Code for refresh dynamic part via ajax
+
+Pagination with angularjs:
+
+<div dir-paginate="incident in incidentList|orderBy:sortKey:reverse|filter:search|itemsPerPage:10">
+
+<dir-pagination-controls max-size="4" direction-links="true"
+	boundary-links="true" class="pull-right paginationPadding">
+</dir-pagination-controls>
+
+Double equals(==) - checks to equality. 
+	
+	Ex. var c = 10;
+		var d = "10";
+		alert(c==d)//true
+
+Triple equals(===) - checks for equlity of data and datatype.
+	
+	Ex. var e = 10;
+		var f = "10";
+		alert(e===f)//false
+		
+		
+null vs undefined
+undefined - value of the variable undefined. typeofundefiend also undefined.
+null - empty valus for defined variable.
+
+Use strict - Throw up the errors for certain coding practices.
+
+// File: myscript.js
+
+'use strict';
+var a = 2;
+....
+
+function doSomething() {
+    'use strict';
+    ...
+}
+
+Prototype:
+
+Javascript object has a prototype. Prototype is an object.
+
+Creating Prototype:
+function Person(first, last, age, eyecolor) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eyecolor;
+}
+Person.prototype.name = "Hello";
+
+var myFather = new Person("John", "Doe", 50, "blue");
+ 
+Prototype used to extend properties and methods for existing prototype/javascript object.
+
+function Person(first, last, age, eyecolor) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eyecolor;
+}
+Person.prototype.name = function() {
+    return this.firstName + " " + this.lastName;
+};
+
+Method chaining - bob.setName('Bob').setColor('black'); Builder design pattern.
+
+The ready event occurs after the HTML document has been loaded, while the onload event occurs later, when all content (e.g. images) also has been loaded.
+
+How do you make images responsive?
+Bootstrap 3 allows to make the images responsive by adding a class .img-responsive to the <img> tag. This class applies max-width: 100%; and height: auto; to the image so that it scales nicely to the parent element.

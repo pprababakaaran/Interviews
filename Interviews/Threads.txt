@@ -2,12 +2,10 @@ Concurrent Programming
 1. Thread
 2. Processes
 
-Time Slicing
-
 IPC - Inter Process Communication
 Process - Instance of Program running in a computer or task. Own Separate memory.
 
-Theards - Lightweight process. Threads from same process same memory space.
+Theards - Lightweight process. Threads from same process same memory space. If one process takes more time, spilt that task into multiple thread and execute parallerl.
 
 Start->New->Runnable->Running->Pause/Sleep->Terminate
 
@@ -33,6 +31,8 @@ Daemon thread - service provider thread that provides services to the user threa
 preemptive scheduling - Highest priority task executes until it enters the waiting or dead states
 time slicing - Task executes for a predefined slice of time and then reenters the pool of ready tasks
 Thread pool - group of worker threads that are waiting for the job and reuse many times.
+ThreadLocal - Can be associated with Thread scope. ThreadLocal variables but two thread can not see each others ThreadLocal variable.
+			  Each thread holds an exclusive copy of ThreadLocal variable which becomes eligible to Garbage collection after thread finished or died, normally or due to any Exception,
 
 CountDownLatch is useful if you want to start main processing thread once its dependency is completed.
 

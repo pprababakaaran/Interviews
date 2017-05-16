@@ -127,6 +127,7 @@ RedBus - Distributed environment - how do you block the seat once user is select
 Producer, Consumer problem - Threading
 How do you troublesuit runtimeexception? - Analyzing heapdump
 
+
 Problem statement: Coffee vending machine
 
 https://www.careercup.com/
@@ -151,6 +152,41 @@ Facade
 Proxy
 
 
+UI:
+---
+Javascript hoisting
+DOM
+Media query
+Updated something section-section navigation.
+Pagination angular/normal
+directives
+ES6 - I dont know
+Updated on server. how to update in UI?
+Broadcost
+promise - async
+Tricky angular/normal ui question
+== & ===
+reactive rx.
+Angular 1.5 vs 2
+reactive pattern
 
+cloud platform
+Azure PaaS
 
+Load Balancing
+Data Structure
 
+Find the second highest salary
+
+select distinct(salary) from imts_schema.employee order by salary desc LIMIT 2,1;
+
+SELECT DISTINCT (a.salary) FROM imts_schema.employee A WHERE 2 = 
+(SELECT COUNT(distinct(b.salary)) FROM imts_schema.employee B WHERE a.salary<=b.salary
+);
+
+SQL works in all database
+one-one
+
+Lazy Loading? Why?
+Spring transaction management
+ACID Principle

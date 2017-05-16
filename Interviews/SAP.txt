@@ -21,7 +21,7 @@ Single operator NAND gate build !(a&&b)
 TreeSet
 TreeMap
 
-Red Black tree(Unbalanced) vs Binary Tree (Balanced)
+Red Black tree(Self Balanced Binary Tree) vs Binary Tree (Balanced)
 
 
 Encapsulation vs abstraction
@@ -36,3 +36,11 @@ Developer in SAP Labs, Bangalore with 5+ years experience working primarily as a
 Part of Core Development team working on IOT Jersey (Reference Implementation for JAX-RS 2.0) based Platform As A Service (PaaS), for providing data based services platform to Siemens.
 
 Also good hands-on with Javascript based programming paradigms- SAP UI5, Fiori, Angular JS, HANA XS.
+
+git pull origin master
+
+git add -A
+
+git commit -m "Interview Preparations"
+
+git push origin master

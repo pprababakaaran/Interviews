@@ -1,0 +1,117 @@
+Find the second highest salary
+
+select distinct(salary) from imts_schema.employee order by salary desc LIMIT 2,1;
+
+SELECT DISTINCT (a.salary) FROM imts_schema.employee A WHERE 2 = 
+(SELECT COUNT(distinct(b.salary)) FROM imts_schema.employee B WHERE a.salary<=b.salary
+);
+
+
+RDBMS
+ACID:
+Atomicity - Either all of its operations are executed or none. Either commit or rollback. one block of statement. like synchornized.
+Consistency - Transaction must leave database in consistent state even if it succeed or rollback.
+Isolation - If two transactions happening at same time should not affect each other.
+Durability - Data has to be persisted successfully in database once transaction completed successfully.
+
+
+NoSQL: 
+CAP Property (Consistency, Availability, Partition Tolerance)
+Consistency - updating several nodes before allowing further reads 
+Availability - replicating the data across different machines
+Partition Tolerance - Only entire network failure can cause the system to respond incorrectly.
+
+Higher vloumes, velocities, varities.
+
+
+Database Indexing - Index is a pointer to the data in a table.
+Make database search faster
+B-Tree/balanced tree structure internally
+
+Without Index - Table scan - sequential  - scan rows from the table - logical read is high.
+With Index - Scanning particular range of rows from a clusterd index. - Logical read is less.
+
+Clusterd Index - Fetching will faster. But during insertion and removal, it will slower, because again structure needs to be modified.
+Non-clusterd Index - Fecthing will be slower. But insertion and removal will be faster.
+
+Clusterd Index - Original table structure is modified. Actual data will be available in leaf node clusterd index. Sorted based on index column. Ex. A, AB in the page contains the actual data.
+Non Clusterd - Actual data will not be available in leaf node. Non clusterd index leaf node will have reference to original data or non clusterd index refers clusterd index leaf node to get actual data. Ex. Index page will have reference number to actual content.
+Composite Index - More than one column. Non-clusterd. Logical grouping done.
+
+The clustered index is organized by the key columns. It also includes every other column as part of the row structure (ie, it has the entire row).
+
+The nonclustered index is also organized by the key columns. It implicitly includes the clustering key columns (if the table is clustered), or a pointer to the row (if the table's a heap). If any INCLUDE columns are explicitly specified, they will also be included in the index structure.
+
+There is a corner case where it makes sense to have a non-clustered index "duplicating" the clustered index. 
+If you have a query that frequently scans the table, and ONLY makes use of the clustering key column, the query optimizer will prefer to use the non-clustered index. 
+The non-clustered index does not contain the full row data, and thus it will take up less physical space. 
+Because it takes up less physical space, SQL Server can scan the table with fewer IOs, and will make use of it for performance reasons.
+
+why only one clustered index per table?
+	Original table structure is modified in clusterd index. So table can have only one clusterd index. But same table can have non-clusterd index for different colmun.
+
+If the index is non-unique, a uniquifier added internally to make it unique, ,and it carries thourgh into reference values, Reference Ids are always unique.
+
+SQL							| NoSQL
+RDBMS						| Non relational, distributed database
+static predefined schema	| dynamic schema
+Table based database		| Key-value pair, graph, document, wide column stores
+Strucutured					| Unstructured
+Compled query				| not suit for complex query
+Not for hierachical data	| best for hierachical data
+ACID Property				| CAP Theorom
+Table & related				| Data is grouped as chunk
+MySql, oracle, MSSQL,Sqlite	|  MongoDB, CouchDB, Bigtable, HBase, Casaandra, Neo4j etc.
+
+Tables						| collections
+Pre-defined structure		| Dynamic schema
+Normalization				| Cost of storage
+Strucutured					| Unstructured
+Mapper						| Native
+Transactional				| Pure Scale
+ACID						| CAP
+Just Data					| Big Data
+Data Record					| Internet of Things
+
+https://docs.microsoft.com/en-us/azure/documentdb/documentdb-nosql-vs-sql
+
+Example: Social media. Post - Images, Audios, Videos, comments
+
+{
+    "id":"ew12-res2-234e-544f",
+    "title":"post title",
+    "date":"2016-01-01",
+    "body":"this is an awesome post stored on NoSQL",
+    "createdBy":User,
+    "images":["http://myfirstimage.png","http://mysecondimage.png"],
+    "videos":[
+        {"url":"http://myfirstvideo.mp4", "title":"The first video"},
+        {"url":"http://mysecondvideo.mp4", "title":"The second video"}
+    ],
+    "audios":[
+        {"url":"http://myfirstaudio.mp3", "title":"The first audio"},
+        {"url":"http://mysecondaudio.mp3", "title":"The second audio"}
+    ]
+}
+
+MongoDB, CouchDB, DocumentDB - Json like documents. Ex. Used in Facebook.
+Redis - Key value pair. Used as cache.
+Neo4j - Graph database. Collection of nodes and edges. Node represents enity(Person/business). Edges are connection. Ex. Used in linkedIn connection.
+
+IoT, Gaming, mobile, documents -NoSQL
+
+Database Tunning:
+1. Database statistics - Use analyze or stats command to find read blocks and estimated time to run.
+2. Create optimized indexes
+3. Avoid functions on RHS of the operator
+4. Predetermine expected growth
+5. Specify optimizer hints in SELECT
+6. Avoid foreign key constraints
+7. Select limited data
+
+Relational databases are designed to run on a single server in order to maintain the integrity of the table mappings and avoid the problems of distributed computing.
+
+Scaling Relational Databases Is Hard.
+
+NoSQL Databases are Designed for Scale. NoSQL databases are designed for massive scale on distributed systems (usually hundreds of Terabytes rather than tens of Gigabytes).
+Fast and easy to add or remove nodes.

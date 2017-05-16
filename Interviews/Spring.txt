@@ -1,0 +1,206 @@
+Spring Core:
+-------------
+core - includes IoC and DI
+Bean - Implementation of factory design pattern through BeanFactory
+Context - ApplicationContext is extenion of BeanFactory. It support internationalization, application life cycle event and validation. Includes enterprise services like JNDI Access, Email, EJB Integration, Remoting, Schdueling.
+Expression Language - Powerful in JSP. It is used to write expression langauge querying various beans, accessing and manipluting.
+
+Data Access - Database access layer
+JDBC - JDBC abstraction layer to remove the complexity of the traditional JDBC code.
+ORM - Data access technologies and object relation mapping.
+OXM - Converts objects into XML.
+JMS - API reduces number of lines to send and receive messages
+Transaction - Transaction management for POJO
+
+Web - Provides MVC, Servlet, Portlet communication
+
+Others  - AOP, Security, AspectJ, Test
+
+IoC Containers:
+----------------
+Responsible to instantiate the application class, configure the object and to assemble the dependencies between the objects. It gets the information from XML configuration.
+
+Way to getbean from of IOC Containers
+1. Bean Factory(XMLBeanFactory) 
+- Instansitate bean when getBean("beanname") get called. 
+- To do autowiring need to register AutoWiredBeanPostProcessor.
+- BeanFactory OK for testing.
+	Resource resource=new ClassPathResource("applicationContext.xml"); 
+	BeanFactory factory=new XmlBeanFactory(resource);  
+2. ApplicationContext(ClassPathXmlApplicationContext) 
+- Instansitate singleton bean when container get started. It doesnot wait for getbean("beanname") to get called.
+	    ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");  
+		
+Dependency Injection:
+----------------------
+- Design pattern which removes the dependency from programming code. It makes programming code loosely coupled.
+
+DI by constrcutor:
+<bean id="address" class="com.honeywell.Address">  
+	<constructor-arg value="street1"></constructor-arg>  
+	<constructor-arg value="street2"></constructor-arg>  
+	<constructor-arg value="India"></constructor-arg>  
+</bean> 
+
+<bean id="e" calss="com.honeywell.Employee">
+	<constrcutor-arg value="10" type="int"></constrcutor-arg>
+	<constructor-arg><ref bean="address"></constructor-arg>  
+</bean>
+
+DI by Setter Method:
+
+<bean id="address11" class="com.honeywell.Address">  
+	<constructor-arg value="street1"></constructor-arg>  
+	<constructor-arg value="street2"></constructor-arg>  
+	<constructor-arg value="India"></constructor-arg>  
+</bean> 
+
+<bean id="e" calss="com.honeywell.Employee">
+	<property name="address" ref="address11"></property>
+	<property name="id" value="E527753"></property>  
+</bean>
+
+Autowiring:
+------------
+- Enables you to inject object dependency implicitly.
+- Autowiring can't be done for primitive and string values. It works with only reference.
+
+Mode:
+no - No autowiring
+byName
+byType
+constrcutor
+
+<bean id="b" class="org.sssit.B"></bean>  
+<bean id="a" class="org.sssit.A" autowire="byName"></bean>
+
+Aspect Oriented Programming (AOP):
+-----------------------------------
+- It provides the modularity.
+- AOP breaks the program logic into distinct parts.
+- AOP can be used in metering, logging,tracing/monitoring, authorization
+
+Ex. AOP Proxy - can be used in caching
+	Advice - BeforeAdvice, AfterAdvice. U can modify the web request. Advice can't be added/removed during AOP proxies.
+	Intercepters - prehandle, posthandle. U can't modify the web request. Intercepters can be added/removed during AOP proxies.
+
+Spring MVC:
+------------
+Dispatcher Servlet
+Handler Mapping/Request Mapping
+Controller
+ModelAndView
+ViewResolver
+View
+
+1. User request to Dispatcher servlet. Acts as front controller to manage the flow of the MVC application.
+2. Dispatcher Servlet sends request to Handler Mapping
+3. Handler Mapping tells Dispatcher Servler which controller needs to be called for user request.
+4. Dispatcher Serlvet sends the user request header to controller.
+5. Controller executes business logic and sends ModelAndView object to Dispatcher Serlvet.
+6. Dispatcher Serlvet calls ViewResolver to find which view needs to be invoked.
+7. ViewResolver sends details about view which is mapped.
+8. Dispatcher Serlvet sends Model object to view and view renders the details.
+
+@Controller - Stereotype for presentation layer like spring MVC/Rest
+@RestController - Stereotype for Rest Service
+@Service - Stereotype for service layer or business logic
+@Resposistory - Stereotype for persistence layer. DAO
+@Component - Generic Stereotype for any Spring-Managed Component. DAO+Service+MVC
+
+Spring Bean Scope:
+-------------------
+singleton - Return a single bean instance per Spring IoC container. when getBean("beanname") get called first time object will be created for bean class as singleton.
+
+prototype - Return a new bean instance each time when requested. New object will be created each time when getBean("beanName") get called. 
+Ex. Mark mark1 = context.getBean("mark"); 
+	Mark mark2 = context.getBean("mark"); 
+	mark1 == mark2; //This will return false 
+
+request - Return single bean instance per HTTP Request. If you call getBean("beanname") twice in same request, it will return same object. 
+Ex. Mark mark1 = context.getBean("mark");
+	Mark mark2 = context.getBean("mark");
+	mark1 == mark2; //This will return true
+
+session - Return a single bean per HTTP session. Only valid in the context of a web-aware Spring ApplicationContext.
+
+globalSession - globalSession scope is equal as session scope on portlet-based web applications.
+
+How to inject prototype object to singleton? We can use <aop:scoped-proxy/>
+
+Spring Bean Life Cycle:
+1. Spring IoC container will look for bean definition in XML file.
+2. Using reflection container will create object and if any property is defined inside the bean definition then it will also be set.
+3. If Bean implements init, the respective init-method will get called.
+4. IoC container will inject bean to program.
+5. If Bean implements DeposbleBean, the respective deposble-method will get called.
+
+ContextLoaderListener - Reads the configuration file against contextConfigLocation in web.xml, parse it and loads the singleton bean defined in that config file.
+
+Spring Security:
+-----------------
+1. Authentication
+2. Authorization
+3. Session Management, Session Timeout
+4. Password Encoding
+5. Secure Access
+
+<session-management invalid-session-url="/logout.html">
+    <concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+</session-management>
+
+Hibernate:
+-----------
+session.get():
+- Hit the database if object is not found in session cache
+- It will return null if object is not found in database
+- It will return fully initialized object
+- Use get if you think that object is exists or not.
+
+session.load():
+- Hit the database if object is not found in session cache
+- It will return ObjectNotFoundException, if object not found in database
+- It will return proxy object. It returns getId() of object
+- Use load if you think that object is exists.
+
+Save:
+- Returns generated Id after saving.
+- Insert the object into database, but INSERT fails if primary is exists already.
+- We can invoke this method outside the transaction. 
+- If we use this outside transaction and we have cascading between entites, then only the primary entity gets saved unless we flush the session.
+- Calling save on detached object will create new row.
+- Fires insert query immediately.
+
+SaveOrUpdate:
+- First executes the SELECT query to determine if it needs to do an INSERT or UPDATE operation.
+
+Persist:
+- void return type after saving.
+- Persist method works only inside transaction boundary.
+- It adds the entity object to presistent context.
+- If the object properties are changed before transaction is committed or session is flushed, it will be also saved.
+- Calling save method on detached object will fail.
+- Fires insert query after flush.
+
+Merge:
+- Merge should be used to put entity back to persistence context if the entity was detached and changed.
+
+Caching:
+1st Level: session cache. Objects are cached for current session.
+2nd Level: session factory cache. Objects are cached at session factory level. It is global for session object, not enabled by default.
+Different Vendors provides second level cache. Ex. EH Cache, teracotta, OS Cache, JBoss Cache.
+    <property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property>  
+    <property name="hibernate.cache.use_second_level_cache">true</property>  
+
+Transaction Management:
+Local Transaction Management: Manages single transactional resource like JDBC. 
+Global Transaction Management: Used in distributed environment. Use to work with multiple transaction resources like RDBMS or Message Queue.
+
+Configuration based management - 	<tx:annotation-driven transaction-manager="transactionManager" />
+
+ Java Transaction API (JTA), one of the Java Enterprise Edition (Java EE) APIs, enables distributed transactions to be done across multiple X/Open XA resources in a Java environment.
+ Java Persistence API (JPA), for single transaction. To talk to single database. JDBC.
+ 
+ <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+</bean>

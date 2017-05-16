@@ -1,6 +1,8 @@
+https://github.com/pprababakaaran/Interviews
+
 JIT Compiler - If loop or methods takes more than thersold level, jvm uses JIT compiler to convert bytecode into machine code.
 JDK - Convert java code into bytecode
-JVM & JRE - JVM is runtimetime platform. JRE is implementation of JVM.
+JVM & JRE - JVM is runtime platform. JRE is implementation of JVM. JVM is responsible to convert bytecode into machine understanding code.
 
 Class Loader - Delegation, Visibility, Uniqueness.. Bootstrap(rt.jar), Extension(ext) and application(classpath).
 visibility principle - Child ClassLoader can see class loaded by Parent ClassLoader but vice-versa is not true.
@@ -8,16 +10,21 @@ Which mean if class Abc is loaded by Application class loader than trying to loa
 Load Class Explicitly - Class.forName(classname)
 forName() -> loadClass()->findClass() if not found ClassNotFoundException  else defineClass(). URLClassLoader, CustomClassLoader
 
+ClassNotFoundException  - Runtime Exception. Occurs when trying to load class files using loadClass() or Class.forname() at run time which is not updated in the classpath.
+NoClassDefFoundError - Error occurs when referenced class is not found the classpath location. class definition, which is present at compile time, but missing at run time.
+
 String and Immutable class
 String one = "abc"; - Check string pool, if avialble JVM assign reference to existing object, if not create and assign.
 String two = new String("abc"); - two objects. One object in string pool and second in heap memory refered by var two and having same char sequence.
 two.intern() - one and two will point to same string pool literal.
 
-Immutable class - Final Class, Final member variable, no setter method.
+Immutable class - Final Class, Final member variable, no setter method and Clone the mutable member varibale like Date.
+
+Static and Transient varibales can't be seriliaized.
 
 Transient - To mark member variable not to be serialized.some secured information like password, SSN number etc. Image Thumbnail can be use transient. IF member variable can be reformed during runtime rather than getting from stream.
 
-Volatile - Used in Multithreading. Indicator to java compiler and Thread do not cache value of this variable and always read from main memory. If you want to share variable in which read and write operation is atomic by implementation. Indicate that this variable may be used by another thread.
+Volatile - Used in Multithreading. The value of this variable will never be cached thread-locally: all reads and writes will go straight to "main memory"; Access to the variable acts as though it is enclosed in a synchronized block, synchronized on itself.
 
 Atomic - AtomicInteger can be used, where synchornized increment operations are required. compare and swap. if current value is not equal to incoming value then value will be replaced.
 
@@ -27,15 +34,18 @@ SingleTon double locking check
 
 Abstraction - When you have partial implementation methods(concerete methods) Ex. Common method or implementation for subclass. Partial or 100% abstraction. If code is frequently changing go with abstract class.
 Interface - When you dont know implementation. 100% abstraction. JVM looks for vtable during resolution time. So interface is time taking.
-Marker Interface - Empty Interface. Used to inform something to the compiler. Ex. Serializable or Cloneable.
+Marker Interface - Empty Interface. Used tol inform something to the compiler. Ex. Serializable or Cloneable.
 
 List(Interface)->AbstractList(Abstract Class, implements List and implements common methods)->ArrayList or LinkedList(Extends AbstractList)
 
-Serialization - Object -> Stream of Bytes(Binary Format) -> FILE,DB,MEMORY or Another JVM
+Serialization - Object -> Stream of Bytes(Binary Format) -> FILE,DB,MEMORY or Another JVM. JVM handles default serilization.
 and serialVersionUID - ID stamped with object when it gets serialized using hashcode. Used as version of control. 
-When you add pr modify any field in class then already serialized class will not able  to recover  becuase  serialVersionUID generated for new class is different. http://javarevisited.blogspot.com/2011/04/top-10-java-serialization-interview.html
+When you add or modify any field in class then already serialized class will not able  to recover  becuase  serialVersionUID generated for new class is different. http://javarevisited.blogspot.com/2011/04/top-10-java-serialization-interview.html
 if we don't provide serialVersionUID in our code java compiler will generate it and normally it’s equal to hashCode of object.
 
+NotSerializableException - If one of the members doesnot implement serilizable.
+
+Externalization - provides complete control of serilization to application.
 ObjectOutputStream.writeObject(), ObjectInputStream.readObject() readExternal() and writeExternal()
 
 Cloneable - If you don't implement Cloneable then invoking super.clone() will throw a CloneNotSupportedException.
@@ -48,10 +58,19 @@ Polymorphism - which advice use of common interface instead of concrete implemen
 Static Binding - Type/Method resolution happens at compile time. Ex. Method overloading.
 Dynamic Binding - Type/Method resolution happens at runtime based in object created. Ex. Method  Overriding.
 
+Enumeration - collection.elements(). hasMoreElements(), nextElement(). Allows only to iterate and get elements. Doesn't allows to remove the elements from collection objects. Vector supports enumeration and arraylist doesnot support. Not thread safe.
+Iterator - collectionObj.iterator(), iter.hasElements(), iter.next(), iter.remove(). Allows to remove. Thread safe and secure. Throws concurrentmodificationexception
+
 Array - Contigneous memory. int a[] = new int[10]; memory 10*32 bit (10*4 byte). a will point to starting point.
-Vector - Thread safe. All the methods which structurely modifies are synchornized. Ex, add(), remove(). Doubling the array size
-ArrayList - Internally uses dynamic array. get(index) O(1), insert, remove O(n). ensureCapacity(size+1), shallow copy. Increases 50% of current arraysize.
-LinkedList - Internally uses doubly linked list. get(index) O(n), insert, remove O(1)
+Vector - Thread safe. All the methods which structurely modifies are synchornized. Ex, add(), remove(). Doubling the array size. Default size is 10.
+ArrayList - Internally uses dynamic array. get(index) O(1), insert, remove O(n). ensureCapacity(size+1), shallow copy. Increases 50% of current arraysize. Default size 10. Inseration and retrieval order is same.
+LinkedList - Internally uses doubly linked list. get(index) O(n), insert, remove O(1). Inseration and retrieval order is same.
+
+Enumeration - Used in Legacy collections like vector. List doesnot support. Remove is not possible. hasMoreElement(), nextElement().
+Iterator - List, Set uses iterator. secure and safe. It doesnot allow other thread to modify collection object. It throws concurrentmodificationexception. hasNext(), next(), remove()
+ListIterator - Allows to traverse both direction by using method previous, next. Also add method is there.
+Fail-Fast Iterator - Fail as soon as structure of collection has changed. It throws ConcurrentModificationException.
+Fail-Safe Iterator - Concurrent thread works on clone of collection object instead of original object. Ex. Iterator on CopyOnWriteArrayList or ConcurrentHashMap
 
 HashMap - Hashing Prinicple. Internally it uses linkedlist but in in java 8 it uses Tree. Key HashCode, Hash Value, Bucket(Entry[]. Default is 16. When size reached 3/4(load factor: 0.75), Entry[] will be increased by double(rehashing). Resizing in multithreading concepts will cause for race condition).
 Put->AddEntry(Find index to place entry<k,v> based on key index)->Entry<K,V>.
@@ -64,6 +83,9 @@ HashMap get:
 1. Calculate bucket index using key hashcode
 2. Gets all the Entry<K,V> from bucket index, loop through if hashcode and key value matches it returns the value.
 
+PutForNullKey & getForNullKey used to handle null key insertion and retrieval. Null Key always maps to index(0).
+
+True need of equals and hashcode arises when you insert object as key in hash based collection. Ex. Hashtable or hashmap.
 If we are inserting custom class as key, hashcode and equals (contract) should be overridden to avoid chances  of collision.
 
 HashCode&Equals Contract :	1) If two objects are equal, then they must have the same hash code.
@@ -77,7 +99,7 @@ Null K,V Allowed	|Only Null V allowed	|Null K,V Allowed
 Bukets				|Red-Black Tree			|Double-Linked Buckets
 
 HashSet:
-Internally uses HashMap. Allows only unique elements. Set Values are stored in Map key and valus are est to null. Only one null key allowed.
+Internally uses HashMap. Allows only unique elements. Set Values are stored in Map key and valus are set to null. Only one null key allowed.
 
 HashSet				|TreeSet				|LinkedHashSet
 No Order			|Sorted Natural Order	|Insertion Order
@@ -109,11 +131,6 @@ Worker implements Runnable->In run() {Runnable r = queue.dequeue->;r.run()}
 ThreadPoolManager - >Constrcutor(int THREAD_MAX_CAP = capacity;initAllConsumers();)->initAllConsumers(){loop in thread_max_cap{Thread t = new thread(new worker(myQueue,i.toString());t.start())}}->submitTask(Runnable r) (myQueue.enqueue(r);)
 TestThreadPoolManager - > poolManager.submitTask(new Runnable() { override run()} );
 
-Enumeration - Used in Legacy collections like vector. List doesnot support. Remove is not possible. hasMoreElement(), nextElement().
-Iterator - List, Set uses iterator. secure and safe. It doesnot allow other thread to modify collection object. It throws concurrentmodificationexception. hasNext(), next(), remove()
-ListIterator - Allows to traverse both direction by using method previous, next. Also add method is there.
-Fail-Fast Iterator - Fail as soon as structure of collection has changed. It throws ConcurrentModificationException.
-Fail-Safe Iterator - Concurrent thread works on clone of collection object instead of original object. Ex. Iterator on CopyOnWriteArrayList or ConcurrentHashMap
 
 map.keySet() - Gives all keys from map. Set<String>
 map.entrySet() - Gives all keys and values from map. Set<Map.Entry>
@@ -124,6 +141,66 @@ Generic - Compile time type safety, faciliate template kind of thing(Ex. List). 
 Comparable - Single sorting sequence., compareTo(object o)
 Comporator - Multiple sorting sequence Ex. String. public int compare (Object o1, Object o2)
 
+Collections.synchornizedMap() or Collections.SynchronizedList() - single collection lock. Locks the entire object. It leads to performance issue in highly concurrent application.
+ConcurrentHashMap or CopyOnWriteArrayList used in highly concurrent application to make object concurrent. It will lock only specific methods like put or remove.
+
+LRU Cache - LRUCache, use LinkedHashMap, once map size reaches remove old element using removeEldestEntry(Map.Entry<K,V> eldest) and insert new element at end.
+
+Java 8 Features:
+Lambda Expression:
+- Functional programming. Method can be created without belonging to any class. Lambda Expression can be passed around as if it was an object on demand.
+- Method can be passed to another method in arg section.  
+
+Stream API:
+- Stream is a conceptually fixed data structure, computed on demand basis.
+- Stream API supports parallel operations on the data, while completley hiding the multi threading logic and letting the developer fully concerete on data.
+- It supports aggregation operations like fillter, map, collect.
+List<String> listTeams = allTeams.stream().parallel().map(u -> u.getTeamid()).collect(Collectors.toList());
+
+Functional Interface:
+- Interface which has single method(single abstract method) SAM is called functional interface. Ex. Runnable, clonable. Which can be called like below
+
+Thread t = new Thread(()->{
+   System.out.println("Runnable implemented by using Lambda Expression");
+});
+
+Traditional:
+Thread t =new Thread(new Runnable(){
+   public void run(){
+     System.out.println("Runnable implemented by using Lambda Expression");
+   }
+});
+
+Binary Tree : 
+- Left is less than or equal to root, right is greater thean or equal to root. insert, remove, find - o(log(n))
+- BST should implement comparable interface as like TreeMap
+- InOrder - left->root->right (use recursive call using root element to travese)
+- PostOrder - left->right->root
+- PreOrder - root->left->right
+
+
+
+
+Programming:
+1 1 2 3 5 8 13 ...
+int getFibonacci(int n)
+{
+if(n == 1){return 1;} if(n == 2) {return 1;}
+return getFibonacci(n-1)+getFibonacci(n-2);
+}
+
+prime number that can be divided by itself and 1.
+2 3 5 7 11 13 17 19...
+
+boolean isPrime(int number) {
+for(int i=2;i<number;i++)
+{
+if(number%i == 0) {return false;}
+}
+ return true;
+}
+
+
 Creational Design Pattern - Object creation
 SingleTon - Double Checking lock, synchornized, Volatile, singleton with Enum. Ex. Logging, Runtime.getRunTime()
 Factory - Encapsulate object creation logic.Ex. Converter object creation for PDFConverter, DOCConverter. Ex. in jdk valueOf(), getInstance(), newInstance(), Spring, Structs, hibernate session factory Ex. JDBC getConnection() without knowing database type
@@ -133,13 +210,82 @@ Prototype - Clone the object or create different instance of itself with the sam
 Structural Design Pattern - how classes and objects can be composed, to form larger structures.
 Decorator - Enhance/add the functionality of particular object at runtime. Wrap the original object with decorator object. Ex. in JDK InputStream, OutputStream, Reader, Writer, Collections.synchornizedMap() etc.
 Facade - Simplied Interface talks to multiple sub systems (Ex. take memberIds from local database and send that data to IA+ system to fetch or update some information)
-Proxy
+Proxy - Represents functionality of other class. We create an object having original object. Ex. Manager gets update from me and project that to customer. Image and Thumbnail image.
 Flyweight - Reusing exiting object Ex. Cache
-Adapater - Sibel Adapater, jCO connector, function module
+Adapater (Wrapper pattern) - Sibel Adapater, jCO connector - Wrapper of implementation and talks to two classes.
 
 Behavioural Design Pattern
-Strategy - Runtime change the behaviour
-Observer - Push Notification  
+Strategy - Runtime change the behaviour. Example: do payment using different gateways
+Observer - Register for event. Notify when change happen. Ex. Push Notification  or Company updates all its shareholders for any decision or change in policy of company or order status changes
+
+Circular Machanisum
+How do u interact with different database based on enviorment?
+how u can create arraylist without using collections?
+Arraylist vs Linkedlist?
+Hashmap vs ConcurrentHashMap?
+SynchronizedHashMap vs ConcurrentHashMap?
+Spring Transactions
+How do u handle the orders when thrid party service is down?
+
+LinkedList is cyclic or not
+//Two pointer, one move my one and one move by two. if two pointers are equals then its cyclic
+public boolean isCyclic(){
+        Node fast = head;
+        Node slow = head;
+       
+        while(fast!= null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+           
+            //if fast and slow pointers are meeting then LinkedList is cyclic
+            if(fast == slow ){
+                return true;
+            }
+        }
+        return false;
+    }
+Read more: http://javarevisited.blogspot.com/2013/05/find-if-linked-list-contains-loops-cycle-cyclic-circular-check.html#ixzz4erwHyb3F
+
+Get nth element from end of linked list:
+	
+public String getLastNode(int n) {
+    Node fast = head;
+    Node slow = head;
+    int start = 1;
+
+    while (fast.next != null) {
+      fast = fast.next;
+      start++;
+
+      if (start > n) {
+        slow = slow.next;
+      }
+    }
+
+    return slow.data;
+  }
+
+http://javarevisited.blogspot.in/2016/07/how-to-find-3rd-element-from-end-in-linked-list-java.html
 
 
-LRU Cache - LRUCache, use LinkedHashMap, once map size reaches remove old element using removeEldestEntry(Map.Entry<K,V> eldest) and insert new element at end.
+How do you implement queue using two stack?
+
+Create two stacks : 's' and 'tmp' as in the program given below
+For insert operation :
+    if size of s = 0 then
+        push value into s
+    else
+        push all popped elements from s to tmp
+        push value into s
+        push all popped elements from tmp to s
+ 
+For remove operation :
+    if size of s = 0 then
+        throw 'underflow' exception
+    else 
+        return pop element from s
+
+Reactive Programming is a style of micro-architecture involving intelligent routing and consumption of events, all combining to change behaviour. 
+Akka, Netflex API
+
+Reactive programming is programming with asynchronous data streams. Highly concurrent with event driven application.
