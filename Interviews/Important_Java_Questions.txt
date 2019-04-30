@@ -140,7 +140,14 @@ Generic - Compile time type safety, faciliate template kind of thing(Ex. List). 
 
 Comparable - Single sorting sequence., compareTo(object o)
 Comporator - Multiple sorting sequence Ex. String. public int compare (Object o1, Object o2)
+we must ask ourselves why use a Comparator if we already have Comparable?
 
+There are several reasons why:
+
+    1. Sometimes, we can’t modify the source code of the class whose objects we want to sort, thus making the use of Comparable impossible
+    2. Using Comparators allows us to avoid adding additional code to our domain classes
+    3. We can define multiple different comparison strategies which isn’t possible when using Comparable
+	
 Collections.synchornizedMap() or Collections.SynchronizedList() - single collection lock. Locks the entire object. It leads to performance issue in highly concurrent application.
 ConcurrentHashMap or CopyOnWriteArrayList used in highly concurrent application to make object concurrent. It will lock only specific methods like put or remove.
 

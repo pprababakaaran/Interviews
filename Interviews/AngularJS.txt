@@ -173,3 +173,9 @@ ECMAScript 6
 Annotation driven
 dependency injection
 Generics can be used
+
+Angular 6.0:
+ng new MyExpo
+ng serve
+localhost:4200
+ng generate component heroes
