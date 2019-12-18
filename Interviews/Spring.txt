@@ -20,6 +20,8 @@ IoC Containers:
 ----------------
 Responsible to instantiate the application class, configure the object and to assemble the dependencies between the objects. It gets the information from XML configuration.
 
+ApplicationContext is parse applicationcontext.xml and creates object and inject. ApplicationContext uses abstractFactory design pattern.
+
 Way to getbean from of IOC Containers
 1. Bean Factory(XMLBeanFactory) 
 - Instansitate bean when getBean("beanname") get called. 
@@ -198,9 +200,9 @@ Global Transaction Management: Used in distributed environment. Use to work with
 
 Configuration based management - 	<tx:annotation-driven transaction-manager="transactionManager" />
 
- Java Transaction API (JTA), one of the Java Enterprise Edition (Java EE) APIs, enables distributed transactions to be done across multiple X/Open XA resources in a Java environment.
- Java Persistence API (JPA), for single transaction. To talk to single database. JDBC.
+Java Transaction API (JTA), one of the Java Enterprise Edition (Java EE) APIs, enables distributed transactions to be done across multiple X/Open XA resources in a Java environment.
+Java Persistence API (JPA), for single transaction. To talk to single database. JDBC.
  
- <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
+<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="entityManagerFactory" />
 </bean>

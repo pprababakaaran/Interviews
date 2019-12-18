@@ -1,0 +1,137 @@
+Useful links:
+https://sourcemaking.com/design_patterns
+https://refactoring.guru/design-patterns/
+
+
+Design Principles:
+==================
+OOA/ Object Modeling:
+Identify Objects
+Keep the right objects
+Identify attributes
+Keeping the right attributes
+Identify the RelationShips
+Test access path
+re-iterate entire model again
+
+Priniciples of OOD:
+Cohension - to indicate the degree to which a class has a single, well-focused purpose. (Single Responsibility Principle)
+Coupling - Dependency of one module in another module ( Dependency Inversion Principle)
+
+SOLID Design Principles:
+S – Single Responsibility Principles:
+1.	 “There should not be more that one reason for a class get Change” 
+2.	Every class must have single responsibility and should be entirely encapsulated by the class.
+
+O – Open Close Principles:
+1.	“Software entities (Class,module,function) must be Open for extension but Close for Modification”
+2.	Any new functionality must be added as new Class or new Method without changing the existing code.(Bug Fix is a different Case)
+
+L – Liskov’s Substitution Principles:
+1.	“In Class hierarchies, subclass should be complete substitutable for their base Class.”
+2.	Must make sure the derived class are extending the base classes without changing their behaviors.
+3.	Design by Contract(DbC)
+
+I-Interface Segregation principle:
+1.	“Client should not be forced to depend upon the interfaces which they do not use. ”
+2.	Many Client Specific Interface are better than one general purpose interface.
+3.	Aim is to split the interfaces, which are very large into small and SPECIFIC, so the client known methods only which there are interested. 
+
+D- Dependency Inversion Principle:
+1.	“Depend on abstraction, not on concretions” .
+2.	High level module should not depend on the low level module. High level module must not use the directly use the low-level module.
+3.	High level must use the low level indirectly thorough the interface of the low level (Run time polymorphism)
+
+* Don't Repeat yourself(DRY):(Utility and Helper Classes)
+Every piece of knowlege must have a single, sunabmbiguous, authoritatice representation with in a system.
+Aoid duplicate code by absstracting out things that are common and placing those things in a single location.
+
+* Law of Demeter Principle(LoD)
+Law of Demeter(LoD) is more of a guideline than a principle to help reduce coupling between components.
+
+Examples:
+Worst:
+obj.getX()
+      .getY()
+        .getZ()
+          .doSomething();
+
+Best:
+obj.doSomething();
+
+* Tell Don't Ask
+Tell Don't ask is princiaple helps us remember that object-orientation is about bundling data with the functions that operate on that data.
+It reminds us that rather than asking an object for data and acting on that data, we should instead tell an object to do.
+This encourages to move behavior into an object to go with the data.
+
+Desgin Patterns:
+================
+* General repeatable solution to a commonly occuring problem in software design.
+* A design pattern isn't a finished design that can be transformed directly into code
+* It is descritpion or template for how to solve a problem that can be used.
+
+Types of Design Pattern:
+
+* Creational Design Pattern - Deals with object creation mechanisms, trying to create objects in a manner suitable to the situation.
+* Structural Design Pattern - Ease the design by identifying a simple way to realize relationships between entities
+* Behaviour Design Pattern - Identify common communication pattern between objects and realize these patterns. By doing so, these pattersn increase flexibility in carrying out this communication.
+
+Creational Design Pattern:
+1. Singleton - Only one instance of the class is created and provide a global point to access it.
+2. Factory - Define a Interface for creating object, but let the subclass decide which class to instantiate.
+3. Abstract Factory - Factory of Factory. Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
+4. Builder - Solves too many constructor problem. Separation Construction of Complex object from its representation- allow client object to construct a complex object by specifying only its type and content being shielded from the details related to the object’s representation. This way the construction process can be used to create different representations.
+5. Prototype - Cloning the object. Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype.
+
+Prototype:
+* The object cloning is a way to create exact copy of an object.
+* By default java cloaning is field y field copy. I.e as the object class does not have idea about the structure of class on which clone() method will be invoked
+* JVM when called for cloning do the following things
+	- For primitive data type members of the class a completely new copy of the object will be created and the reference to the new object copy will be returned.
+	- If the class contains memers of any class type then only the object reference to those members are copied and hence the member reference in both original and cloned objects will be referring to same class type.
+
+super.clone() - shallow copy
+
+Behaviour Design Pattern: Design patterns that identify common communication patterns between objects and realize these patterns. By doing so, these patterns increase flexibility in carrying out this communication
+
+1. Template
+    * Define the skeleton of an algorithm in an operation, deferring some steps to client subclasses. Template Method lets subclasses redefine certain steps of an algorithm without changing the algorithm's structure.
+    * Base class declares algorithm 'placeholders', and derived classes implement the placeholders.
+2. Command
+    * Encapsulate a request as an object, thereby letting you parametrize clients with different requests, queue or log requests, and support undoable operations.
+    * Promote "invocation of a method on an object" to full object status
+    * An object-oriented callback
+3. Interator
+	* Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
+4. Observer
+	* Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.
+	* Encapsulate the core (or common or engine) components in a Subject abstraction, and the variable (or optional or user interface) components in an Observer hierarchy.
+5. Chain of Responsibility
+	* Avoid coupling the sender of a request to its receiver by giving more than one object a chance to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it.
+	* Launch-and-leave requests with a single processing pipeline that contains many possible handlers.
+6. Strategy - Behavioural parameterization. Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from the clients that use it.
+7. Null object - The intent of a Null Object is to encapsulate the absence of an object by providing a substitutable alternative that offers suitable default do nothing behavior.
+
+
+Structural Design Pattern: Design Patterns that ease the design by identifying a simple way to realize relationships between entities
+
+1. Composite
+	* To compose objects into tree structures.
+	* For the Client the individual object and Composited Object will be treated as Same.
+2. Bridge
+	* The Bridge pattern is an application of the old advice, “prefer composition over inheritance”.
+	* It becomes handy when you must subclass different times in ways that are orthogonal with one another.
+	* Decouple an abstraction from its implementation so that the two can vary independently.
+3. FlyWeight - Reusing exiting object. Ex. StringPool, Cache
+4. Decorator
+	* Enhance/add the functionality of particular object at runtime with the help of composition.
+	* Wrap the original object with decorator object. 
+	* Ex. in JDK InputStream, OutputStream, Reader, Writer, Collections.synchornizedMap() etc.
+5. Facade
+	* Provide a unified interface to a set of interfaces in a subsystem. Facade defines a higher-level interface that makes the subsystem easier to use. 
+	* Simplied Interface talks to multiple sub systems.
+	* JDBC Connection is good example for Facade.
+	* Ex. Component reading customer data from salesforce and getting pricing details & order data from SAP.
+	* In Java all the wrapper classes are facade
+6. Proxy - Add a wrapper and delegation to protect the real component from undue complexity.
+7. Dependency Injection - Design pattern which removes the dependency from programming code. It makes programming code loosely coupled.

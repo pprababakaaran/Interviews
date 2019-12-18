@@ -1,0 +1,37 @@
+Jenkins Installation
+sudo apt-get update
+sudo apt install openjdk-8-jdk
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update
+sudo apt install jenkins
+sudo apt-get install docker.io
+sudp apt-get install maven
+
+service jenkins status
+
+104.211.214.224:8080
+
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+5edd27f1a59842f08ecdb4fbb81214ba
+
+Jenkins URL: http://104.211.214.224:8080/
+innotigers/connecting3#
+
+VM 1: learning
+Ip: 104.211.214.224
+innotigers/connecting3#
+
+VM 2: learning-slave
+Ip: 52.172.30.29
+innotigers/connecting3#
+
+/home/innotigers/jenkins
+
+java -jar agent.jar -jnlpUrl http://104.211.214.224:8080/computer/slave-1/slave-agent.jnlp -secret 99cadedbb002ff7af96eb30ea6593c42fe13d25dc660a912e77bf917a9f72381 -workDir "/home/innotigers/jenkins"
+
+https://github.com/hshar/devopsIQ.git
+https://github.com/pprababakaaran/springboot-swagger-learning.git
+
+http://52.172.30.29:8080/person?name=prabakaran

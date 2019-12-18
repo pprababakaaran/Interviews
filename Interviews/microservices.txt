@@ -1,0 +1,102 @@
+Microservices Architecture:
+	* Decoupling – Services within a system are largely decoupled. So the application as a whole can be easily built, altered, and scaled
+    * Componentization – Microservices are treated as independent components that can be easily replaced and upgraded
+    * Business Capabilities – Microservices are very simple and focus on a single capability
+    * Autonomy – Developers and teams can work independently of each other, thus increasing speed
+    * Continous Delivery – Allows frequent releases of software, through systematic automation of software creation, testing, and approval
+    * Responsibility – Microservices do not focus on applications as projects. Instead, they treat applications as products for which they are responsible
+    * Decentralized Governance – The focus is on using the right tool for the right job. That means there is no standardized pattern or any technology pattern. Developers have the freedom to choose the best useful tools to solve their problems
+    * Agility – Microservices support agile development. Any new feature can be quickly developed and discarded again
+
+Spring Cloud - Provides integration with external systems
+Spring Cloud provides the out of the box experiences and a sets of extensive features mentioned below:
+    - Versioned and distributed configuration.
+    - Discovery of service registration.
+    - Service to service calls.
+    - Routing.
+    - Circuit breakers and load balancing.
+    - Cluster state and leadership election.
+    - Global locks and distributed messaging.
+	
+Spring Boot - Framework that will help you to avoid all the code configurations.
+
+Actuator - Used to check the current state application. Like application health and sub systems health.
+
+Spring Security - spring-boot-starter-security
+	@Configuration 
+	public class SecurityConfig extends WebSecurityConfigurerAdapter {     
+	@Override     
+	protected void configure(HttpSecurity http) throws Exception {         
+	http.authorizeRequests()             
+	.antMatchers("/welcome").permitAll()             
+	.anyRequest().authenticated()             
+	.and()             
+	.formLogin()             
+	.permitAll()             
+	.and()             
+	.logout()             
+	.permitAll();     
+	} 
+	
+Embedded Containers - Embedding the container inside your jar file.
+Exclude tomcat from springboot starter web and add jetty
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-web</artifactId>
+		<exclusions>
+			<exclusion>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-tomcat</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-jetty</artifactId>
+	</dependency>
+
+
+Service Discovery - Services typically need to call one another services.
+Service Client->Router->Service Registry->Router-> App1/App2/App3...
+
+Service Client->API Gateway-> App1/App2/App3...
+
+Microservices Testing
+Unit Testing(Mockito,JUnit)->Component/Contract Testing(Karate)->Integration Testing(Custom Framework)->End to End Testing
+
+Container in Microservices - Containers are a good way to manage microservice based application to develop and deploy them individually. You can encapsulate your microservice in a container image along with its dependencies, which then can be used to roll on-demand instances of microservice without any additional efforts required.
+
+Microservices Patterns:
+==========================
+Saga - Sequence of local transactions. ach local transaction updates the database and publishes a message or event to trigger the next local transaction in the saga. If a local transaction fails because it violates a business rule then the saga executes a series of compensating transactions that undo the changes that were made by the preceding local transactions.
+Example: 
+    The Order Service creates an Order in a pending state and publishes an OrderCreated event
+    The Customer Service receives the event attempts to reserve credit for that Order. It publishes either a Credit Reserved event or a CreditLimitExceeded event.
+    The Order Service receives the event and changes the state of the order to either approved or cancelled
+
+Database per service - Keep each microservice’s persistent data private to that service and accessible only via its API. A service’s transactions only involve its database.
+
+Benefits:
+1. Helps ensure that the services are loosely coupled. Changes to one service’s database does not impact any other services.
+2. Each service can use the type of database that is best suited to its needs. For example, a service that does text searches could use ElasticSearch. A service that manipulates a social graph could use Neo4j.
+
+    Private-tables-per-service – each service owns a set of tables that must only be accessed by that service
+    Schema-per-service – each service has a database schema that’s private to that service
+    Database-server-per-service – each service has it’s own database server.
+
+Shared database - Use a (single) database that is shared by multiple services. Each service freely accesses data owned by other services using local ACID transactions.
+
+API Composition - You have applied the Microservices architecture pattern and the Database per service pattern. As a result, it is no longer straightforward to implement queries that join data from multiple services.
+				  Implement a query by defining an API Composer, which invoking the services that own the data and performs an in-memory join of the results.
+				  An API Gateway often does API composition.
+				  
+Command Query Responsibility Segregation (CQRS) - CQRS works on the principle that the model to update information can be different to the model used to read that information.
+CQRS starts to make sense when you see a need to split your conceptual or domain model into separate model for updates and reads.
+http://progressivecoder.com/event-sourcing-and-cqrs-with-axon-and-spring-boot-part-1/
+
+Event sourcing - A service command typically needs to update the database and send messages/events.
+
+
+
+
+https://github.com/saikatkar/spring-cloud-sample

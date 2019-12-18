@@ -115,3 +115,15 @@ Scaling Relational Databases Is Hard.
 
 NoSQL Databases are Designed for Scale. NoSQL databases are designed for massive scale on distributed systems (usually hundreds of Terabytes rather than tens of Gigabytes).
 Fast and easy to add or remove nodes.
+
+
+SELECT distinct N1.N,
+  Case
+        When N1.P is null then 'Root'
+        When N2.P is null then 'Leaf'
+        Else 'Inner'
+  End
+FROM BST N1
+LEFT JOIN BST N2 
+  ON N1.N = N2.P
+ORDER BY N1.n

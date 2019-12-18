@@ -110,7 +110,7 @@ O(1)				|Olog(n)				|O(1)
 Priority Queue - Provide priority to your job where list of job is scheduled.
 BlockingQueue - Thread-safe. throws NullPointerException when you try to add null on queue. Should use BlockingQueue where producer-consumer problem occurs. Where producer writes slowly but consumer read very past.
 ArrayBlockingQueue - Fixed size. If size is fulled, producer has to wait until consumer consumes it from queue.
-LinkedBlockingQueue - Lock before any modification.f you request an element from a LinkedBlockingQueue and the queue is empty, your thread will wait until there is something there.
+LinkedBlockingQueue - Lock before any modification.If you request an element from a LinkedBlockingQueue and the queue is empty, your thread will wait until there is something there.
 ConcurrentLinkedQueue - No lock.  When there is no concurrency between producer-consumer but only between producer-producer and consumer-consumer. when producers first produce something and finish their job by placing the work in the queue and only after the consumers starts to consume, knowing that they will be done when queue is empty.
 
 put() will block if BlockingQueue is full and take() will block if BlockingQueue is empty
@@ -207,6 +207,7 @@ if(number%i == 0) {return false;}
  return true;
 }
 
+https://sourcemaking.com/design_patterns
 
 Creational Design Pattern - Object creation
 SingleTon - Double Checking lock, synchornized, Volatile, singleton with Enum. Ex. Logging, Runtime.getRunTime()
